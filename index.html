@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Helper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="top">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1>Medical Helper</h1>
+                <p class="tag">Get health advice instantly</p>
+            </div>
+
+            <div class="form">
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-user"></i>
+                        <span>Your Name</span>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="name" placeholder="Enter your name">
+                        <div class="line"></div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-stethoscope"></i>
+                        <span>Describe Problem</span>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="problem" placeholder="e.g., headache, fever">
+                        <div class="line"></div>
+                    </div>
+                </div>
+
+                <button class="action-btn" onclick="getAdvice()">
+                    <i class="fas fa-pills"></i>
+                    <span>Get Medical Advice</span>
+                </button>
+            </div>
+
+            <div class="bottom">
+                <p><i class="fas fa-heart"></i> Take care of your health</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert" id="alert">
+        <div class="alert-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div class="alert-text">
+            <h4 id="alert-title">Notice</h4>
+            <p id="alert-msg">Please check form</p>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="result-window" id="resultWindow">
+        <div class="result-content">
+            <div class="result-top">
+                <div class="result-header">
+                    <i class="fas fa-file-medical"></i>
+                    <h2>Your Medical Report</h2>
+                </div>
+                <button class="close-btn" onclick="closeResult()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="user-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="info-detail">
+                        <p class="info-label">Patient Name</p>
+                        <p class="info-value" id="resultName"></p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <div class="info-detail">
+                        <p class="info-label">Medical Issue</p>
+                        <p class="info-value" id="resultIssue"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advice-section">
+                <div class="advice-card">
+                    <div class="card-head">
+                        <div class="card-icon med">
+                            <i class="fas fa-capsules"></i>
+                        </div>
+                        <h3>Prescribed Medicine</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="empty-state" id="medEmpty">
+                            <i class="fas fa-prescription"></i>
+                            <p>Medicine details will be shown here</p>
+                        </div>
+                        <div class="data-show" id="medData"></div>
+                    </div>
+                </div>
+
+                <div class="advice-card">
+                    <div class="card-head">
+                        <div class="card-icon food">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Foods to Eat</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="empty-state" id="eatEmpty">
+                            <i class="fas fa-apple-alt"></i>
+                            <p>Recommended foods will be shown here</p>
+                        </div>
+                        <div class="data-show" id="eatData"></div>
+                    </div>
+                </div>
+
+                <div class="advice-card">
+                    <div class="card-head">
+                        <div class="card-icon avoid">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3>Foods to Avoid</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="empty-state" id="avoidEmpty">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Foods to avoid will be shown here</p>
+                        </div>
+                        <div class="data-show" id="avoidData"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-bottom">
+                <button class="result-btn close" onclick="closeResult()">
+                    <i class="fas fa-check"></i>
+                    <span>Close Report</span>
+                </button>
+                <button class="result-btn save" onclick="saveReport()">
+                    <i class="fas fa-download"></i>
+                    <span>Save Report</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

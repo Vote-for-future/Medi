@@ -190,3 +190,102 @@ window.onload = function() {
         document.getElementById('name').focus();
     }, 500);
 };
+
+function getAdvice() {
+    const nameInput = document.getElementById('name');
+    const problemInput = document.getElementById('problem');
+    
+    const name = nameInput.value.trim();
+    const problem = problemInput.value.trim();
+    
+    if (!name) {
+        showAlert('Name Required', 'Please enter your name');
+        shakeElement(nameInput);
+        return;
+    }
+    
+    if (!problem) {
+        showAlert('Problem Required', 'Please describe your problem');
+        shakeElement(problemInput);
+        return;
+    }
+    
+    showLoading(true);
+    
+    // Simulate backend call with rotation effect
+    simulateBackendCall(name, problem);
+}
+
+function simulateBackendCall(name, problem) {
+    // This simulates waiting for backend response
+    setTimeout(() => {
+        showLoading(false);
+        
+        // Animate button after loading
+        const btn = document.querySelector('.action-btn');
+        btn.style.animation = 'btnSuccess 0.5s ease';
+        setTimeout(() => {
+            btn.style.animation = '';
+        }, 500);
+        
+        showResultWindow(name, problem);
+    }, 2000);
+}
+
+function showResultWindow(name, problem) {
+    document.getElementById('resultName').textContent = name;
+    document.getElementById('resultIssue').textContent = problem.toUpperCase();
+    
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('resultWindow').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Show empty states
+    document.getElementById('medEmpty').style.display = 'flex';
+    document.getElementById('eatEmpty').style.display = 'flex';
+    document.getElementById('avoidEmpty').style.display = 'flex';
+    
+    // Hide data containers
+    document.getElementById('medData').style.display = 'none';
+    document.getElementById('eatData').style.display = 'none';
+    document.getElementById('avoidData').style.display = 'none';
+    
+    // Clear any previous data
+    document.getElementById('medData').textContent = '';
+    document.getElementById('eatData').innerHTML = '';
+    document.getElementById('avoidData').innerHTML = '';
+}
+
+function showLoading(loading) {
+    const btn = document.querySelector('.action-btn');
+    const btnIcon = btn.querySelector('i');
+    const btnText = btn.querySelector('span');
+    
+    if (loading) {
+        btn.disabled = true;
+        btnText.textContent = 'Processing...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
+        btn.style.transform = 'scale(0.95)';
+        btn.style.opacity = '0.8';
+    } else {
+        btn.disabled = false;
+        btnText.textContent = 'Get Medical Advice';
+        btnIcon.className = 'fas fa-pills';
+        btn.style.transform = '';
+        btn.style.opacity = '1';
+    }
+}
+
+// Add CSS for button success animation
+const successStyle = document.createElement('style');
+successStyle.textContent = `
+    @keyframes btnSuccess {
+        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3); }
+        50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(106, 17, 203, 0.5); background: linear-gradient(135deg, #4CAF50, #8BC34A); }
+        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3); }
+    }
+`;
+document.head.appendChild(successStyle);
+
+// Rest of the JavaScript remains the same...
+// (Keep all the other functions from previous code)
